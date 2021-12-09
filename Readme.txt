@@ -1,11 +1,11 @@
 =============================
-Stock Waterfall Effects 0.6.0
+Stock Waterfall Effects 0.6.1
 =============================
 
 Stock Waterfall Effects contains a set of template and engine configuration files, that give amazing waterfall effects to the stock engines.
 This is a config mod and does nothing by itself. You need to install the dependency mods for it to work.
 
-===========
+============
 DEPENDENCIES
 ============
 
