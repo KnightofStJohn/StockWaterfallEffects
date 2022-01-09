@@ -1,5 +1,5 @@
 =============================
-Stock Waterfall Effects 0.6.2
+Stock Waterfall Effects 0.6.3
 =============================
 
 Stock Waterfall Effects contains a set of template and engine configuration files, that give amazing waterfall effects to the stock engines.
@@ -11,7 +11,7 @@ DEPENDENCIES
 
 Required:
 - ModuleManager (v4.1.4)
-- Waterfall (v0.7.0)
+- Waterfall (v0.7.2)
 - B9PartSwitch (v2.19.0)
 
 ============
