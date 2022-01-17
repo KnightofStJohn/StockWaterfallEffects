@@ -11,7 +11,7 @@ DEPENDENCIES
 
 Required:
 - ModuleManager (v4.1.4)
-- Waterfall (v0.7.2)
+- Waterfall (v0.8.0)
 - B9PartSwitch (v2.19.0)
 
 ============
