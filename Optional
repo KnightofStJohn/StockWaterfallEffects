@@ -1,0 +1,199 @@
+//Adds another plume to the Cheetah.
+
+@PART[LiquidEngineLV-T91]:NEEDS[Waterfall]:FOR[StockWaterfallEffects]
+{
+  !fx_exhaustLight_blue = DELETE
+  !fx_exhaustFlame_blue = DELETE
+  !fx_smokeTrail_light = DELETE
+  !sound_vent_medium = DELETE
+  !sound_rocket_hard = DELETE
+  !sound_vent_soft = DELETE
+  !sound_explosion_low = DELETE
+  
+  !EFFECTS {}
+  EFFECTS
+  {
+		fx-cheetah-running
+		{
+		    AUDIO
+            {
+                channel = Ship
+                clip = Waterfall/Sounds/KW/sound_altloop
+                volume = 0.0 0.0
+                volume = 1.0 0.5
+                pitch = 0.0 1.0
+                pitch = 1.0 1.0
+                loop = true
+            }
+        }
+        engage
+        {
+            AUDIO
+            {
+                channel = Ship
+                clip = Waterfall/Sounds/KW/sound_liq5
+                volume = 0.5
+                pitch = 1.0
+                loop = false
+            }
+        }
+        disengage
+        {
+            AUDIO
+            {
+                channel = Ship
+                clip = sound_vent_soft
+                volume = 0.5
+                pitch = 2.0
+                loop = false
+            }
+        }
+        flameout
+        {
+            AUDIO
+            {
+                channel = Ship
+                clip = sound_explosion_low
+                volume = 0.5
+                pitch = 2.0
+                loop = false
+            }
+        }
+  }
+  
+  @MODULE[ModuleEngines*]
+  {
+    @name = ModuleEnginesFX
+	%runningEffectName = fx-cheetah-running
+	!powerEffectName
+  }
+  
+  MODULE
+  {
+    name = ModuleWaterfallFX
+    moduleID = CheetahFX
+
+    CONTROLLER
+    {
+      name = atmosphereDepth
+      linkedTo = atmosphere_density
+    }
+    CONTROLLER
+    {
+      name = throttle
+      linkedTo = throttle
+	  engineID = basicEngine
+	  responseRateUp = 0.03
+      responseRateDown = 0.2
+    }
+	CONTROLLER
+    {
+      name = Random1
+      linkedTo = random
+	  noiseType = perlin
+	  scale = 1
+	  minimum = 0
+	  speed = 0.2
+	  seed = 4
+    }
+	CONTROLLER
+    {
+      name = Random2
+      linkedTo = random
+	  noiseType = perlin
+	  scale = 0.5
+	  minimum = -0.5
+	  speed = 10
+	  seed = 40
+    }
+	CONTROLLER
+    {
+      name = Random3
+      linkedTo = random
+	  noiseType = perlin
+	  scale = 1
+	  minimum = 0
+	  speed = 5
+	  seed = -20
+    }
+	CONTROLLER
+    {
+      name = Random4
+      linkedTo = random
+	  noiseType = perlin
+	  scale = 0.5
+	  minimum = -0.5
+	  speed = 10
+	  seed = 33
+    }
+	
+    TEMPLATE
+    {
+      templateName = stock-hydrolox-upper-2
+      overrideParentTransform = thrustTransform
+      position = 0,0,-0.1319
+      rotation = 0, 0, 0
+      scale = 0.6925, 0.6925, 0.6925
+	}
+	
+    TEMPLATE
+    {
+      templateName = stock-hydrolox-generator
+      overrideParentTransform = thrustTransform
+	  position = 0.462,0.007,-0.94
+	  rotation = 0, 13, 90
+	  scale = 0.8, 0.8, 0.8
+    }
+  }
+  MODULE
+  {
+  	name = ModuleB9PartSwitch
+	moduleID = plumeSwitch
+	switcherDescription = Plume
+	switcherDescriptionPlural = Plumes
+	affectDragCubes = false
+	affectFARVoxels = false
+	switchInFlight = true
+	
+	SUBTYPE
+	{ 
+		name = default
+		title = Hydrolox
+		primaryColor = OrangeRed
+		secondaryColor = SkyBlue
+		descriptionSummary = Hydrogen-Oxygen Fuel Exhaust
+		descriptionDetail = TBD
+	}
+    SUBTYPE
+    {
+      name = hypergol
+		  title = Hypergolic
+		  primaryColor = ResourceColorMonoPropellant
+		  secondaryColor = Blush
+		  descriptionSummary = Aerozine50-Amyl Fuel Exhaust
+		  descriptionDetail = TBD
+        MODULE
+        {
+            IDENTIFIER { name = ModuleWaterfallFX }
+            DATA
+            {
+            TEMPLATE
+            {
+              templateName = stock-aerozine50-upper-1
+              overrideParentTransform = thrustTransform
+              position = 0,0,-0.1319
+              rotation = 0, 0, 0
+              scale = 0.6925, 0.6925, 0.6925
+	          }
+				    TEMPLATE
+    {
+      templateName = stock-hypergolic-core
+      overrideParentTransform = thrustTransform
+      position = 0,0,0
+      rotation = 0, 0, 0
+      scale = 1, 1, 1
+    }
+            }
+        }
+    }
+}
