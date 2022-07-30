@@ -1,5 +1,5 @@
 =============================
-Stock Waterfall Effects 0.6.3
+Stock Waterfall Effects 0.7.0
 =============================
 
 Stock Waterfall Effects contains a set of template and engine configuration files, that give amazing waterfall effects to the stock engines.
